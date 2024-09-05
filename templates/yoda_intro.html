@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='./dialogue.css')}}">
+
+    {% block dialogue_list %}
+    <!-- INSERT THE DIALOGUE LIST IN THE INHERITED HTML FILE -->
+
+    <script>
+    const dialogue_list = [
+        "Obi-Wan... manage your finances badly you have.",
+        "Poor and jobless you are now.",
+        "Kidnapped, Princess Peach has been, by Darth Vader. Save her, you must...how to get to her?",
+        "Firstly, buy a ship you must. Manage your finances better you should.",
+        "Get you a job now we shall."] 
+    </script>
+    {% endblock %}
+    <script>
+
+
+        function checkDialogue(word) {
+            return word == document.getElementById("character_says").innerHTML;
+        }
+
+        function nextDialogue() {
+            let current_index = dialogue_list.findIndex(checkDialogue);
+            if (current_index != (dialogue_list.length - 1)) {
+                document.getElementById("character_says").innerHTML = dialogue_list[current_index + 1]
+            }
+            else {
+                window.location.href = "L1question";
+            }
+        }
+        function previousDialogue() {
+            let current_index = dialogue_list.findIndex(checkDialogue);
+            if (current_index != 0) {
+                document.getElementById("character_says").innerHTML = dialogue_list[current_index - 1]
+            }
+        }
+        function skipDialogue() {
+            window.location.href = "L1question";
+        
+        }
+        // console.log(document.getElementById("character_says").innertext)
+        // document.getElementById("character_says").innertext = dialogue_list[0]
+
+    </script>
+    {% block head %}
+    {% endblock %}
+</head>
+
+<body>
+    <div class="frame">
+
+        <div class="character_sprite">
+            <img src="../static/images/Yoda_TPM_RotS.png">
+            
+        </div>
+
+        <div class="wrapper1">
+            <div class="text_bubble">
+
+                <!-- the character's dialogue -->
+                <span id="character_says"></span>
+                <script>
+                    document.getElementById("character_says").innerHTML = dialogue_list[0]
+                </script>
+
+            </div>
+            <div class="wrapper2">
+                <div class="button_div">
+                    <button id="skip" class="button" onclick="skipDialogue()">Skip</button>
+                    <button id="next_button" class="button" onclick="nextDialogue()">Next</button>
+                    <button id="previous_button" class="button" onclick="previousDialogue()">Previous</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+

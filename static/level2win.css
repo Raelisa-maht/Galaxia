@@ -1,0 +1,45 @@
+.yoda_happy {
+    max-width: 25%;
+    margin-top: 30vh;
+    margin-left: 20vh;
+    position: relative; /* Needed for absolute positioning during animation */
+    animation: slideInFromLeft 0.5s ease-out forwards; /* Animation properties */
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%); /* Start off-screen to the left */
+    }
+    100% {
+        transform: translateX(0); /* End at the original position */
+    }
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 12vh;
+    margin-left: 7vh;
+    padding: 0vh 3vh;
+    background-color: #FFF4BD;
+    border: 2px solid #D9B500;
+    width: 100vh;
+}
+.container img {
+    max-width: 50%;
+    height: 10vh;
+    height: 50vh;
+    margin-top: 12vh;
+    margin-left: 2vh;
+}
+.text-container {
+    display: flex;
+    flex-direction: column;
+}
+.text-container h2 {
+    font-size: 30px;
+
+}
+.message {
+    font-size: 25px;
+    font-weight: normal;
+}

@@ -1,0 +1,143 @@
+{% extends "level1.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='./../static/level2.css') }}">
+<div class="container" id="container">
+    <!-- Context Paragraph -->
+    <p class="context-paragraph">
+        Which job are you going to choose, obi-wan?
+    </p>
+    <p style="font-style: italic; font-size: 18px; font-weight: bold; color: white; margin-bottom: 5vh;">*income tax is a tax levied by the government on an individual's or entity's earnings.</p>
+
+    <!-- Bank Sections -->
+    <div class="bank-sections">
+        <!-- Bank TZBZ -->
+        <div class="bank-section">
+            <h4>Retail Assistant</h4>
+            <img src="{{ url_for('static', filename='images/obiwan_retail.jpeg') }}" alt="TZBZ" >
+            <p>Average Monthly Salary of SGD 1,800 - 2,000 with 0% to 2% of income tax.</p>
+            <button class="btn-select-btn" data-bank="TZBZ">Select</button>
+        </div>
+
+        <!-- Bank XBS -->
+        <div class="bank-section">
+            <h4>Cleaner</h4>
+            <img src="{{ url_for('static', filename='images/obiwan_cleaner.jpeg') }}" alt="XBS">
+            <p>Average Monthly Salary of SGD 1,500 - 1,800 with 0% of income tax.</p>
+            <button class="btn-select-btn" data-bank="XBS">Select</button>
+        </div>
+
+        <!-- Bank Tatooine -->
+        <div class="bank-section">
+            <h4>Food Delivery Rider</h4>
+            <img src="{{ url_for('static', filename='images/obiwan_food.jpeg') }}" alt="Tatooinebanks" >
+            <p>Average Monthly Salary of SGD 2,000 - 2,500 with 2% to 3.5% of income tax.</p>
+            <button class="btn-select-btn" data-bank="Tatooine" style="background-color: #D9B500; color: white;">Select</button>
+        </div>
+    </div>
+</div>
+
+<!-- Popup Modal (incorrect answer)-->
+<div id="popup-modal" class="pop-up">
+    <div style="display: flex; align-items: center; justify-content: center; margin-top: 10vh;">
+        <img src="{{ url_for('static', filename='images/yoda_sad.png') }}" alt="Yoda Sad" style="width: 200px; margin-right: 20px;">
+        <div style="display: flex; flex-direction: column;">
+            <p style="font-size: 16px; font-weight: bold;">Disappointed me you have.</p>
+            <p style="font-size: 16px;">Try calculating the total monthly income after the deduction of income tax for each role.</p>
+        </div>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+        <button id="try-again-btn" class="btn" style="background-color: #D9B500; color: white; margin-right: 10px;">Try Again</button>
+        <button id="exit-btn" class="btn" style="background-color: #D9B500; color: white;">Exit</button>
+    </div>
+</div>
+
+<!-- Correct Answer Popup Modal -->
+<div id="correct-popup-modal" class="pop-up">
+    <div style="display: flex; align-items: center; justify-content: center; margin-top: 10vh; width: 75vh;">
+        <img src="{{ url_for('static', filename='images/yoda_happy.png') }}" alt="Yoda Happy" style="width: 200px; margin-right: 20px;">
+        <div style="display: flex; flex-direction: column;">
+            <p style="font-size: 16px; font-weight: bold;">Correct choice you have made!</p>
+            <p style="font-size: 16px;">Choosing the Food Delivery Driver job role is the best option despite the having the highest income tax. This is because, it gives you the highest monthly salary after the income tax deduction.</p>
+        </div>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+        <button id="next-btn" class="btn" style="background-color: #D9B500; color: white; margin-right: 10px;">Next</button>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Hover effect for select buttons
+    const selectButtons = document.querySelectorAll('.btn-select-btn');
+    const popup = document.getElementById('popup-modal');
+    const correctPopup = document.getElementById('correct-popup-modal');
+
+
+    // Function to add hover effects
+    function addHoverEffects() {
+        selectButtons.forEach(button => {
+            button.addEventListener('mouseover', hoverIn);
+            button.addEventListener('mouseout', hoverOut);
+        });
+    }
+
+    // Hover effect functions
+    function hoverIn() {
+        this.style.backgroundColor = '#B89A00'; // Darker color on hover
+    }
+    function hoverOut() {
+        this.style.backgroundColor = '#D9B500'; // Original color on mouse out
+    }
+
+    // Initialize hover effects
+    addHoverEffects();
+
+    // Show popup when selecting Bank A or Bank B
+    selectButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const selectedBank = this.getAttribute('data-bank');
+            if (selectedBank === 'TZBZ' || selectedBank === 'XBS') {
+                showIncorrectPopup();
+            } else if (selectedBank === 'Tatooine') {
+                showCorrectPopup();
+            }
+        });
+    });
+
+    function showIncorrectPopup() {
+        popup.style.display = 'block';
+        container.classList.add('blurred'); // Apply blur effect to container
+    }
+
+    function showCorrectPopup() {
+        correctPopup.style.display = 'block';
+        container.classList.add('blurred'); // Apply blur effect to container
+    }
+
+    function hidePopup() {
+        popup.style.display = 'none';
+        correctPopup.style.display = 'none';
+        container.classList.remove('blurred'); // Remove blur effect from container
+    }
+
+    // Handle Try Again button click
+    document.getElementById('try-again-btn').addEventListener('click', function() {
+        hidePopup(); // Hide the popup
+    });
+
+    // Handle Exit button click
+    document.getElementById('exit-btn').addEventListener('click', function() {
+        if (confirm('Are you sure you want to exit?')) {
+            window.close(); // Close the tab after confirmation
+        }
+    });
+
+    // Handle Next button click
+    document.getElementById('next-btn').addEventListener('click', function() {
+        window.location.href = '/level1win'; // Navigate to the next level
+    });
+</script>
+{% endblock %}

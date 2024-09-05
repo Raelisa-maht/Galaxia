@@ -1,0 +1,16 @@
+{% extends "level2.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='./../static/level2win.css') }}">
+<div style="display: flex; flex-direction: row;">
+    <img class="yoda_happy" src="{{ url_for('static', filename='images/yoda_happy.png') }}" alt="Obi-Wan Happy" >
+    <div class="container">
+        <div class="text-container">
+            <h2>Congratulations!</h2>
+            <p class="message">You have chosen wisely You have managed to save up enough money to buy a space ship and for you daily expenses. You bought a ship and managed to save Princess Peach from Darth Vader. Well done! May the force be with you.</p>
+            <p style="font-style: italic;">Please click the exit level button in the top left corner to exit level 2.</p>
+        </div>
+        <img src="{{ url_for('static', filename='images/obiwan-peach.png') }}" alt="Obi-Wan Happy" >
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-mQ93da32gS/1TlH5BUn5e6WEN0USGpJ6B8v5lIbX1kYtjZZkna+pR4Rm/8RBjaT9" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./../static/styles.css') }}">
+    <style>
+        .signup-container {
+            background:white;
+            margin-top: 12%;
+            width: 40%;
+            margin-left:30%;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align:center;
+        }
+        .fields {
+            display:flex;
+            flex-direction:column;
+            gap:10px;
+        }
+        button {
+            background-color: #D9B500;
+            color: white;
+            border: none;
+            padding: 7px 20px;
+            cursor: pointer;
+            margin-left:33%;
+            width:30%;
+            margin-top:5%;
+        }
+        p {
+            text-align:center;
+            margin-left:-2.5%;
+        }
+        .all_fields {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Create 2 equal columns */
+            grid-template-rows: repeat(2, 1fr); /* Create 2 equal rows */
+            gap: 10px; /* Space between items */
+        }
+        .flashes {
+            height:1vh;
+            font-family: 'Arial';
+            font-size:12px;
+            width:40vh;
+            margin-left:25%;
+        }
+        #error-msg {
+            color:red;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container d-flex justify-content-center">
+        <div class="signup-container">
+            <h2 class="text-center">Begin Your Financial Learning</h2>
+            {% from "includes/formHelper.html" import render_field %}
+            <form action="/signup" method="POST">
+                <div class="all_fields">
+                    <div class="fields">
+                    {{ render_field(form.username, class="field-box") }}
+                    </div>
+                    <div class="fields">
+                        {{ render_field(form.email, class="field-box") }}
+                    </div>
+                    <div class="fields">
+                        {{ render_field(form.password, class="field-box") }}
+                    </div>
+                    <div class="fields">
+                        {{ render_field(form.confirm, class="field-box") }}
+                    </div>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </div>
+                <p>Already have an account? Login <a href="/">here</a>.</p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

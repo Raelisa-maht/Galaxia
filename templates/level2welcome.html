@@ -1,0 +1,16 @@
+{% extends "level2.html" %}
+{% block content %}
+<style>
+
+</style>
+<button id="next" class="btn" style="margin-left: 10px; margin-top: 10px;">Next</button>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.getElementById('next').addEventListener('click', function() {
+        // Navigate to the new template when the button is clicked
+        window.location.href = '/L2question';
+    }); // Add the closing parenthesis and semicolon here
+</script> <!-- Add this closing script tag -->
+{% endblock %}

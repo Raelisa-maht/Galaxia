@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Literacy Game - Levels</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./../static/styles.css') }}">
+    <style>
+        .level-container {
+            position: relative;
+            width: 300px;
+            margin: 50px auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .level {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: grey;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            cursor: not-allowed;
+            color: white;
+        }
+
+        .level.active {
+            background-color: #e2d17a;
+            cursor: pointer;
+        }
+
+        .line {
+            position: absolute;
+            top: 50%;
+            left: 50px;
+            width: 150px;
+            height: 4px;
+            background-color: #000;
+            z-index: -1;
+        }
+
+        .locked {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 style="color: rgb(255, 255, 255); font-size: 50px; padding-top: 30px; text-shadow: 0 0 25px #e2d17a;">Galaxia</h1>
+
+        <!-- Constellation-style Level Display -->
+        <div class="level-container">
+            <!-- Level 1 Node -->
+            <div id="level-1" class="level active">Level 1</div>
+            <div class="line"></div>
+            <!-- Level 2 Node -->
+            <div id="level-2" class="level locked">Level 2</div>
+        </div>
+
+        <!-- Buttons below the constellation -->
+        <button id="level-1-btn" class="btn btn-primary mt-3">Play Level 1</button>
+        <button id="level-2-btn" class="btn btn-greyed-out mt-3" disabled>Play Level 2</button>
+    </div>
+
+    <script>
+        // Function to check if Level 1 has been completed (from localStorage)
+        function isLevel1Completed() {
+            return localStorage.getItem('level1Completed') === 'true';
+        }
+
+        // Function to update the state of Level 2 button and its visual node
+        function updateLevel2State() {
+            const level2Btn = document.getElementById('level-2-btn');
+            const level2Node = document.getElementById('level-2');
+
+            if (isLevel1Completed()) {
+                // Enable the Level 2 button
+                level2Btn.disabled = false;
+                level2Btn.classList.remove('btn-greyed-out');
+                level2Btn.classList.add('btn-success');
+
+                // Make the Level 2 node "active"
+                level2Node.classList.remove('locked');
+                level2Node.classList.add('active');
+                level2Node.style.cursor = 'pointer';
+            }
+        }
+
+        // Initialize the state of Level 2 on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLevel2State();
+        });
+
+        // Handle Level 1 Button Click
+        document.getElementById('level-1-btn').addEventListener('click', function() {
+            alert("Redirecting to Level 1...");
+            // Open yoda_intro.html in the same tab
+            window.open("./yoda", "_blank");
+        });
+
+        // Handle Level 2 Button Click
+        document.getElementById('level-2-btn').addEventListener('click', function() {
+            if (isLevel1Completed()) {
+                alert("Redirecting to Level 2...");
+                window.open("./yoda_change_job", "_blank"); // Replace with actual Level 2 page
+            } else {
+                alert("Complete Level 1 to unlock Level 2.");
+            }
+        });
+    </script>

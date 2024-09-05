@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 2</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div>
+        <button id="exit" class="btn" style="margin-top: 10px;">Exit Level</button>
+        {% if request.path == '/L2question' %}
+            <button id="back-btn" class="btn" style="margin-left: 10px; margin-top: 10px;">Back</button>
+            <button id="hint-btn" class="btn" style="margin-left: 10px; margin-top: 10px;">Hint</button>
+        {% endif %}
+
+        <!-- Hint Dialog Box -->
+        <div id="hint-dialog" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; border: 2px solid #D9B500; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); z-index: 1000; width: 400px;">
+            <p style="font-size: 16px; text-align: center;">Try calculating the total interest earned using compound interest given that there are $100,000 total savings and $20,000 for fixed deposits, assuming that savings amount remains the same throughout the year.</p>
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="close-hint-btn" class="btn" style="background-color: #D9B500; color: white;">Close</button>
+            </div>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+<script>
+    document.getElementById('exit').addEventListener('click', function() {
+        // Show a confirmation dialog
+        if (confirm('Are you sure you want to exit the game?')) {
+            // Close the window/tab
+            window.close();
+        }
+    });
+    // Handle Back button click if it exists
+        const backButton = document.getElementById('back-btn');
+        if (backButton) {
+            backButton.addEventListener('click', function() {
+                window.history.back(); // Go back to the previous page
+            });
+        }
+    // Show Hint Dialog
+    const hintButton = document.getElementById('hint-btn');
+    const hintDialog = document.getElementById('hint-dialog');
+    const closeHintButton = document.getElementById('close-hint-btn');
+    const container = document.getElementById('container');
+
+    hintButton.addEventListener('click', function() {
+        hintDialog.style.display = 'block'; // Show the hint dialog
+        container.classList.add('blurred'); // Apply blur effect to container
+    });
+
+    // Close Hint Dialog
+    closeHintButton.addEventListener('click', function() {
+        hintDialog.style.display = 'none'; // Hide the hint dialog
+        container.classList.remove('blurred'); // Remove blur effect from container
+    });
+</script>
+{% block scripts %}
+{% endblock %}
+</html>

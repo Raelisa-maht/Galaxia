@@ -1,0 +1,78 @@
+@font-face { /*font face specifies a custom font for browser to use*/
+    font-family: 'Neuropol'; /*name u give to font*/
+    src: url('../css/media/neuropol/Neuropol.otf') /*URL to font*/
+}
+body {
+    background-image: url("./images/space1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.frame {
+    margin: auto;
+    background-image: url("./media/background1.png"); /* the bg image that gets swapped out*/
+    background-size: cover;
+    color: rgb(226, 233, 240);
+    width: 1024px;
+    height: 700 px;
+    display: flex;
+
+
+}
+.character_sprite {
+
+    overflow: clip;
+}
+.character_sprite img {
+    height: 500px;
+    width: auto;
+    object-position: 0px 150px;
+}
+.wrapper1 {
+    margin-right: 0px;
+    margin-left: auto;
+    position: relative;
+}
+.text_bubble {
+    border: 2px solid rgb(12, 45, 156);
+    border-radius: 10px;
+    background-color: rgba(49, 65, 116, 0.9) ;
+
+    height: 100px;
+    width: 500px;
+    padding: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
+    font-family: Neuropol, Verdana,sans-serif;
+}
+.button {
+    border: 2px solid #B89400;
+    border-radius: 10px;
+    background-color: #D9B500;
+
+    margin: 10px;
+    font-family: Neuropol, Verdana,sans-serif;
+    padding: 25px 40px;
+    align-self: center;
+    box-shadow: 0 4px rgb(12, 45, 156);
+    color: rgb(12, 45, 156);
+    justify-content: center;
+
+
+}
+.button:active {
+
+    box-shadow: 0 0px rgb(12, 45, 156);
+    transform: translateY(4px);
+  }
+.wrapper2 {
+
+    width: 100% ;
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+    justify-content: end;
+}
+.button_div {
+    margin-right: 10px;
+    margin-left: auto;
+}
